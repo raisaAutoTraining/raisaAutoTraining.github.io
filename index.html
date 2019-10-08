@@ -47,18 +47,19 @@
 <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
 
 <ul id="myUL">
-  <li><a href="#">Adele</a></li>
-  <li><a href="#">Agnes</a></li>
-
-  <li><a href="#">Billy</a></li>
-  <li><a href="#">Bob</a></li>
-
-  <li><a href="#">Calvin</a></li>
-  <li><a href="#">Christina</a></li>
-  <li><a href="#">Cindy</a></li>
+  
 </ul>
 
 <script>
+
+var data = fs.readFile("./allReports.csv").toString('utf-8');
+$.each(data.split(/[\n\r]+/), function(index, line) {
+  lineVals=line.split(",");
+  name=lineVals[0];
+  address=lineVals[1];
+  $('<li>').add($('<a>').text(name).attr("href", address)).appendTo('#myUL');
+});
+
 function myFunction() {
     var input, filter, ul, li, a, i, txtValue;
     input = document.getElementById("myInput");
