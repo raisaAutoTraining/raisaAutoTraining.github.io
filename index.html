@@ -73,7 +73,7 @@ $.each(data.split(/[\n\r]+/), function(index, line) {
   lineVals=line.split(",");
   name=lineVals[0];
   address=lineVals[1];
-  $('<li>').add($('<a>').text(name).attr("href", address)).appendTo('#myUL');
+  $('<a>').text(name).attr("href", address).appendTo($('<li>')).appendTo('#myUL');
 });
 
 function myFunction() {
