@@ -53,6 +53,7 @@
 <script>
 var fs = require("fs");
 var data = fs.readFile("./allReports.csv").toString('utf-8');
+document.write(data)
 $.each(data.split(/[\n\r]+/), function(index, line) {
   lineVals=line.split(",");
   name=lineVals[0];
