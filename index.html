@@ -73,8 +73,9 @@ $.each(data.split(/[\n\r]+/), function(index, line) {
   lineVals=line.split(",");
   name=lineVals[0];
   address=lineVals[1];
-  $('<a>').text(name).attr("href", address).appendTo($('<li>')).appendTo('#myUL');
-});
+  newLi=$('<li>');
+  newLi.appendTo('#myUL');
+  $('<a>').text(name).attr("href", address).appendTo(newLi);
 
 function myFunction() {
     var input, filter, ul, li, a, i, txtValue;
