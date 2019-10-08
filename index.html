@@ -51,9 +51,23 @@
 </ul>
 
 <script>
-var fs = require("fs");
-var data = fs.readFile("./allReports.csv").toString('utf-8');
-document.write(data)
+
+function readTextFile() {
+  var rawFile = new XMLHttpRequest();
+  rawFile.open("GET", "./allReports.csv", false);
+  rawFile.onreadystatechange = function() {
+    if (rawFile.readyState === 4) {
+      var allText = rawFile.responseText;
+      data= allText;
+    }
+  }
+  rawFile.send();
+  return data;
+}
+
+
+var data = readTextFile();
+
 $.each(data.split(/[\n\r]+/), function(index, line) {
   lineVals=line.split(",");
   name=lineVals[0];
