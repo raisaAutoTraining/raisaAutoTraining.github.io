@@ -2,6 +2,18 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+
+
 <style>
   @import url(https://fonts.googleapis.com/css?family=Lato:100,300,400);
 * {
@@ -19,7 +31,7 @@
   margin-bottom: 12px;
 }
 
-#myUL {
+/* #myUL {
   list-style-type: none;
   padding: 0;
   margin: 0;
@@ -39,10 +51,11 @@
 #myUL li a:hover:not(.header) {
   background-color: #eee;
 
-}
+} */
 
 
 
+ 
 ul {
   list-style-type: none;
   margin: 0;
@@ -90,10 +103,8 @@ body {
 
 <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for report.." title="Type in a name">
 
-<ul id="myUL">
-  
-</ul>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<div id="myUL" class="list-group">
+</div>
 
 <script>
 
@@ -117,9 +128,8 @@ $.each(data.split(/[\n\r]+/), function(index, line) {
   lineVals=line.split(",");
   name=lineVals[0];
   address=lineVals[1];
-  newLi=$('<li>');
-  newLi.appendTo('#myUL');
-  $('<a>').text(name).attr("href", address).appendTo(newLi);
+  $('<a>').text(name).attr("href", address).addClass('list-group-item list-group-item-action').appendTo('#myUL');
+    
   });
 
 function myFunction() {
