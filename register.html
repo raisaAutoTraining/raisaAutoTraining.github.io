@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Retraining Report</title>
+
+
+
+
+
+
+    <!-- Font Awesome -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+<!-- Bootstrap core CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+<!-- Material Design Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/css/mdb.min.css" rel="stylesheet">
+
+
+
+<!-- JQuery -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/js/mdb.min.js"></script>
+
+
+
+
+<style>
+
+body {
+    font-size: 1em;
+    background: #fafafa;
+    font-family: Lato;
+    font-weight: 300;
+}
+        
+
+.spinner input {
+  text-align: right;
+}
+.input-group-btn-vertical {
+  position: relative;
+  white-space: nowrap;
+  width: 1%;
+  vertical-align: middle;
+  display: table-cell;
+}
+.input-group-btn-vertical > .btn {
+  display: block;
+  float: none;
+  width: 100%;
+  max-width: 100%;
+  padding: 8px;
+  margin-left: -1px;
+  position: relative;
+  border-radius: 0;
+}
+.input-group-btn-vertical > .btn:first-child {
+  border-top-right-radius: 4px;
+}
+.input-group-btn-vertical > .btn:last-child {
+  margin-top: -2px;
+  border-bottom-right-radius: 4px;
+}
+.input-group-btn-vertical i{
+  position: absolute;
+  top: 0;
+  left: 4px;
+}
+</style>
+        
+
+</head>
+<body>
+<!-- Extended default form grid -->
+<form style="margin-left:2%;margin-right:40%;margin-top: 2%">
+        <!-- Grid row -->
+        <div class="form-row">
+          <!-- Default input -->
+          <div class="form-group col-md-6">
+            <label for="inputEmail4">Email</label>
+            <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+          </div>
+          <!-- Default input -->
+          <div class="form-group col-md-6">
+            <label for="inputPassword4">Package Name</label>
+            <input type="password" class="form-control" id="inputPassword4" placeholder="My Package">
+          </div>
+        </div>
+        <!-- Grid row -->
+      
+        <!-- Default input -->
+        <div class="form-group">
+          <label for="inputAddress">Git Repo URL</label>
+          <input type="text" class="form-control" id="inputAddress" placeholder="https://www.exampleRepo.com">
+        </div>
+        <!-- Default input -->
+        <div class="form-group">
+          <label for="inputAddress2">Package Pip Setup Path (relative to repo root folder)</label>
+          <input type="text" class="form-control" id="inputAddress2" placeholder="./examplePackage/package">
+        </div>
+        <!-- Grid row -->
+        <div class="form-row">
+          <!-- Default input -->
+          
+          <!-- Default input -->
+          <div class="form-group col-md-6">
+                <label for="inputCity">Training Server</label>
+                <select class="browser-default custom-select">
+                      </select>      
+          </div>
+          <div class="form-group col-md-6">
+                <label for="inputCity">Retraining Period (Days)</label>
+                <div class="input-group spinner">
+                        <input type="text" class="form-control" id="spin" value="30">
+                        <div class="input-group-btn-vertical">
+                          <button class="btn btn-default" type="button"><i class="fa fa-caret-up"></i></button>
+                          <button class="btn btn-default" type="button"><i class="fa fa-caret-down"></i></button>
+                        </div>
+          </div> 
+        </div>   
+        </div>          
+          <div class="form-group">
+                <label for="exampleFormControlTextarea1">Package Description</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
+              </div>  
+        
+            <div class="form-group">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="gridCheck">
+                    <label class="form-check-label" for="gridCheck">
+                    Retrain Once Registered
+                    </label>
+                </div>
+       
+        <!-- Grid row -->
+        <div class="form-group"></div>
+        <button type="submit" class="btn btn-primary btn-md" style="float: right">Submit</button>
+        <div class="form-group"></div>
+      </form>
+      <!-- Extended default form grid -->
+  <!-- Extended material form grid -->
+</body>
+<script>
+(function ($) {
+  $('.spinner .btn:first-of-type').on('click', function() {
+    $('.spinner input').val( parseInt($('.spinner input').val(), 10) + 1);
+  });
+  $('.spinner .btn:last-of-type').on('click', function() {
+      if (parseInt($('.spinner input').val(),10)!=0){
+        $('.spinner input').val( parseInt($('.spinner input').val(), 10) - 1);
+      }
+    });
+$("#spin").change(function () {
+    if (parseInt($("#spin").val()<0),10){
+    $("#spin").val("30");
+    }
+});
+    
+  
+})(jQuery);
+</script>
+</html>
