@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Retraining Report</title>
+
+
+
+
+
+
+    <!-- Font Awesome -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+<!-- Bootstrap core CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+<!-- Material Design Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/css/mdb.min.css" rel="stylesheet">
+
+
+
+<!-- JQuery -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/js/mdb.min.js"></script>
+
+
+
+
+<style>
+
+body {
+    font-size: 1em;
+    background: #fafafa;
+    font-family: Lato;
+    font-weight: 300;
+}
+        
+
+.spinner input {
+  text-align: right;
+}
+.input-group-btn-vertical {
+  position: relative;
+  white-space: nowrap;
+  width: 1%;
+  vertical-align: middle;
+  display: table-cell;
+}
+.input-group-btn-vertical > .btn {
+  display: block;
+  float: none;
+  width: 100%;
+  max-width: 100%;
+  padding: 8px;
+  margin-left: -1px;
+  position: relative;
+  border-radius: 0;
+}
+.input-group-btn-vertical > .btn:first-child {
+  border-top-right-radius: 4px;
+}
+.input-group-btn-vertical > .btn:last-child {
+  margin-top: -2px;
+  border-bottom-right-radius: 4px;
+}
+.input-group-btn-vertical i{
+  position: absolute;
+  top: 0;
+  left: 4px;
+}
+</style>
+        
+
+</head>
+<body>
+<!-- Extended default form grid -->
+<form style="margin-left:2%;margin-right:40%;margin-top: 2%">
+        <!-- Grid row -->
+        <div class="form-group">
+          <!-- Default input -->
+          
+            <label for="inputEmail4">Package Name</label>
+            <input type="text" class="form-control" id="inputEmail4" placeholder="My Package">
+          </div>
+          <!-- Default input -->
+
+          
+              <!-- Default input -->
+              
+              <!-- Default input -->
+              <div class="form-group">
+                <label class="radio-inline"><input type="radio" name="optradio" id="updateRadio" checked>Update</label>
+                <label class="radio-inline" style="margin-left:2%"><input type="radio" name="optradio" id="deleteRadio">Delete</label>
+                </div>
+          
+          <div class="form-group">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="gridCheck">
+                    <label class="form-check-label" for="gridCheck">
+                    Retrain once updated
+                    </label>
+                </div>
+          </div>
+       
+        <!-- Grid row -->
+        <div class="form-group"></div>
+        <button type="submit" class="btn btn-primary btn-md" style="float: right">Submit</button>
+        <div class="form-group"></div>
+      </form>
+      <!-- Extended default form grid -->
+  <!-- Extended material form grid -->
+</body>
+<script>
+$("#deleteRadio").change(function () {
+    $("#gridCheck").attr("disabled", true);
+  });    
+  
+$("#updateRadio").change(function () {
+    $("#gridCheck").removeAttr("disabled");
+});
+</script>
+</html>
