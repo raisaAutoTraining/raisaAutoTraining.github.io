@@ -2,8 +2,17 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>Retraining Report</title>
+  <title>Register</title>
 
+
+
+
+
+
+
+<link href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
 
@@ -15,6 +24,11 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 <!-- Material Design Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/css/mdb.min.css" rel="stylesheet">
+
+
+
+
+
 
 
 
@@ -72,37 +86,119 @@ body {
   top: 0;
   left: 4px;
 }
+
+
+.modal-confirm {		
+	font-family: 'Varela Round', sans-serif;
+	color: #636363;
+	width: 325px;
+}
+.modal-confirm .modal-content {
+	padding: 20px;
+	border-radius: 5px;
+	border: none;
+}
+.modal-confirm .modal-header {
+	border-bottom: none;   
+	position: relative;
+}
+.modal-confirm h4 {
+	text-align: center;
+	font-size: 26px;
+	margin: 30px 0 -15px;
+}
+.modal-confirm .form-control, .modal-confirm .btn {
+	min-height: 40px;
+	border-radius: 3px; 
+}
+.modal-confirm .close {
+	position: absolute;
+	top: -5px;
+	right: -5px;
+}	
+.modal-confirm .modal-footer {
+	border: none;
+	text-align: center;
+	border-radius: 5px;
+	font-size: 13px;
+}	
+.modal-confirm .icon-box {
+	color: #fff;		
+	position: absolute;
+	margin: 0 auto;
+	left: 0;
+	right: 0;
+	top: -70px;
+	width: 95px;
+	height: 95px;
+	border-radius: 50%;
+	z-index: 9;
+	background: #82ce34;
+	padding: 15px;
+	text-align: center;
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+}
+.modal-confirm .icon-box i {
+	font-size: 58px;
+	position: relative;
+	top: 3px;
+}
+.modal-confirm.modal-dialog {
+	margin-top: 80px;
+}
+.modal-confirm .btn {
+	color: #fff;
+	border-radius: 4px;
+	background: #82ce34;
+	text-decoration: none;
+	transition: all 0.4s;
+	line-height: normal;
+	border: none;
+}
+.modal-confirm .btn:hover, .modal-confirm .btn:focus {
+	background: #6fb32b;
+	outline: none;
+}
+.trigger-btn {
+	display: inline-block;
+	margin: 100px auto;
+}
+
+
+
 </style>
-        
+
 
 </head>
 <body>
+    <div id="form_errors" class="alert alert-danger fade in" style="display:none">
+    </div>
 <!-- Extended default form grid -->
-<form style="margin-left:2%;margin-right:40%;margin-top: 2%">
+<form id="mainForm" style="margin-left:2%;margin-right:40%;margin-top: 2%">
         <!-- Grid row -->
         <div class="form-row">
           <!-- Default input -->
           <div class="form-group col-md-6">
             <label for="inputEmail4">Email</label>
-            <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+            <input type="email" class="form-control" id="userMail" placeholder="Email" required>
           </div>
           <!-- Default input -->
           <div class="form-group col-md-6">
             <label for="inputPassword4">Package Name</label>
-            <input type="text" class="form-control" id="inputPassword4" placeholder="My Package">
+            <input type="text" class="form-control" id="packageName" placeholder="My Package" required>
           </div>
         </div>
         <!-- Grid row -->
       
         <!-- Default input -->
         <div class="form-group">
-          <label for="inputAddress">Git Repo URL</label>
-          <input type="text" class="form-control" id="inputAddress" placeholder="https://www.exampleRepo.com">
+          <label for="repoUrl">Git Repo URL</label>
+          <input type="url" class="form-control" id="repoUrl" placeholder="https://www.exampleRepo.com" required>
         </div>
         <!-- Default input -->
         <div class="form-group">
-          <label for="inputAddress2">Package Pip Setup Path (relative to repo root folder)</label>
-          <input type="text" class="form-control" id="inputAddress2" placeholder="./examplePackage/package">
+          <label for="relativeSetupPathInRepo">Package Pip Setup Path (relative to repo root folder)</label>
+          <input type="text" class="form-control" id="relativeSetupPathInRepo" placeholder="./examplePackage/package" required>
         </div>
         <!-- Grid row -->
         <div class="form-row">
@@ -110,14 +206,14 @@ body {
           
           <!-- Default input -->
           <div class="form-group col-md-6">
-                <label for="inputCity">Training Server</label>
-                <select class="browser-default custom-select">
+                <label for="trainingServer">Training Server</label>
+                <select id="trainingServer"class="browser-default custom-select">
                       </select>      
           </div>
           <div class="form-group col-md-6">
-                <label for="inputCity">Retraining Period (Days)</label>
+                <label for="retrainPeriodInDays">Retraining Period (Days)</label>
                 <div class="input-group spinner">
-                        <input type="text" class="form-control" id="spin" value="30">
+                        <input type="text" class="form-control" id="retrainPeriodInDays" value="30">
                         <div class="input-group-btn-vertical">
                           <button class="btn btn-default" type="button"><i class="fa fa-caret-up"></i></button>
                           <button class="btn btn-default" type="button"><i class="fa fa-caret-down"></i></button>
@@ -126,14 +222,14 @@ body {
         </div>   
         </div>          
           <div class="form-group">
-                <label for="exampleFormControlTextarea1">Package Description</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
+                <label for="packageDescription">Package Description</label>
+                <textarea class="form-control" id="packageDescription" rows="2" required></textarea>
               </div>  
         
             <div class="form-group">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="gridCheck">
-                    <label class="form-check-label" for="gridCheck">
+                    <input class="form-check-input" type="checkbox" id="reTrainOnceRegistered">
+                    <label class="form-check-label" for="reTrainOnceRegistered">
                     Retrain Once Registered
                     </label>
                 </div>
@@ -145,8 +241,30 @@ body {
       </form>
       <!-- Extended default form grid -->
   <!-- Extended material form grid -->
+
+  <div id="myModal" class="modal fade">
+      <div class="modal-dialog modal-confirm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div class="icon-box">
+              <i class="material-icons">&#xE876;</i>
+            </div>				
+            <h4 class="modal-title" style="width: 100%">Awesome!</h4>	
+          </div>
+          <div class="modal-body">
+            <p class="text-center">Your package has been registered successfully. You should receive a confirmation email shortly.</p>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-block" data-dismiss="modal" onclick="goHome();">Home</button>
+          </div>
+        </div>
+      </div>
+    </div>   
+
+    
 </body>
 <script>
+  
 (function ($) {
   $('.spinner .btn:first-of-type').on('click', function() {
     $('.spinner input').val( parseInt($('.spinner input').val(), 10) + 1);
@@ -156,13 +274,117 @@ body {
         $('.spinner input').val( parseInt($('.spinner input').val(), 10) - 1);
       }
     });
-$("#spin").change(function () {
-    if (parseInt($("#spin").val()<0),10){
-    $("#spin").val("30");
+
+$("#retrainPeriodInDays").change(function () {
+    if (parseInt($("#retrainPeriodInDays").val(),10)<=0){
+    $("#retrainPeriodInDays").val("30");
     }
 });
-    
-  
 })(jQuery);
+
+function goHome(){
+  window.location.href = "https://raisaautotraining.github.io";
+}
+
+
+function loadServerNamesToCombo(){
+
+
+  var xhr = new XMLHttpRequest();
+  var url = "http://127.0.0.1:5000/getServers";
+
+  xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        
+        options=xhr.responseText.split(",")
+        var optionsAsString = "";
+        for(var i = 0; i < options.length; i++) {
+            optionsAsString += "<option value='" + options[i] + "'>" + options[i] + "</option>";
+            }    
+          $( 'select[id="trainingServer"]' ).append( optionsAsString );
+      }
+  };
+  
+xhr.open("GET", url);
+xhr.send();
+
+}
+
+
+
+// this is the id of the form
+$("#mainForm").submit(function(e) {
+  
+  e.preventDefault();
+
+  var xhr = new XMLHttpRequest();
+  var url = "http://127.0.0.1:5000/register";
+
+  xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200){
+          $('#hiddenSuccessTrigger').click();
+        }else{
+          bootstrap_alert('#form_errors', 'Error: '+xhr.message);
+        }
+      }
+  };
+  
+xhr.open("POST", url);
+xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+data=JSON.stringify(getInputVals());
+console.log(data)
+xhr.send(data);
+
+
+
+});
+
+
+
+
+
+function getInputVals(){
+  var keys = ["packageName",
+"relativeSetupPathInRepo",
+"repoUrl",
+"packageDescription",
+"userMail",
+"retrainPeriodInDays",
+"reTrainOnceRegistered",
+"trainingServer"];
+
+  outDict={};
+
+  keys.forEach(function (item, index) {
+    value=(item=="reTrainOnceRegistered")?$("#"+item).prop('checked'):$("#"+item).val(); //handle bool value
+    if (item=="retrainPeriodInDays"){
+      value=parseInt(value,10)
+    }
+    outDict[item]=value;
+});
+  return outDict;
+}
+
+function bootstrap_alert(elem, message, timeout) {
+  $(elem).show().html('<div class="alert"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><span>'+message+'</span></div>');
+
+  if (timeout || timeout === 0) {
+    setTimeout(function() { 
+      $(elem).alert('close');
+    }, timeout);    
+  }
+};
+
+loadServerNamesToCombo();
+
+    
+
 </script>
 </html>
+
+
+
+
+
+

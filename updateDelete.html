@@ -6,6 +6,11 @@
 
 
 
+  <link href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
 
 
 
@@ -78,13 +83,13 @@ body {
 </head>
 <body>
 <!-- Extended default form grid -->
-<form style="margin-left:2%;margin-right:40%;margin-top: 2%">
+<form id="mainForm" style="margin-left:2%;margin-right:40%;margin-top: 2%">
         <!-- Grid row -->
         <div class="form-group">
           <!-- Default input -->
           
-            <label for="inputEmail4">Package Name</label>
-            <input type="text" class="form-control" id="inputEmail4" placeholder="My Package">
+            <label for="packageName">Package Name</label>
+            <input type="text" class="form-control" id="packageName" placeholder="My Package" required>
           </div>
           <!-- Default input -->
 
@@ -115,6 +120,47 @@ body {
   <!-- Extended material form grid -->
 </body>
 <script>
+
+
+// this is the id of the form
+$("#mainForm").submit(function(e) {
+  
+  e.preventDefault();
+
+  var xhr = new XMLHttpRequest();
+
+  isDeleteRequest=$('gridCheck').attr("disabled")
+  urlCommand=""
+
+  if (isDeleteRequest){
+    urlCommand="delete"
+    data={"packageName":$("packageName").val()}
+  }else //it's an update
+  {
+    data={"packageName":$("packageName").val(),"reTrainAfterUpdate":$('gridCheck').prop('checked')}
+    urlCommand="update"
+  }
+
+  var url = "http://127.0.0.1:5000/"+urlCommand;
+
+  xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+          alert(xhr.responseText);
+          
+      }
+  };
+  
+
+xhr.open("POST", url);
+xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+data=JSON.stringify(data);
+console.log(data)
+xhr.send(data);
+
+
+
+});
+
 $("#deleteRadio").change(function () {
     $("#gridCheck").attr("disabled", true);
   });    
