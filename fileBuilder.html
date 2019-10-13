@@ -155,10 +155,10 @@ function downloadAutoTrainFile(){
 function buildAutoTrainFileText(){
     fileStr=staticFilePart;
 
-    ul.children.forEach(function (item, index) {
-        fileStr+=dynamicFilePart.replace("MyModel", item.value)
-        });
-    
+    ul.children('input').each(function () {
+      fileStr+=dynamicFilePart.replace("MyModel", this.value)
+      });
+
     return fileStr
     
 }
