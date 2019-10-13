@@ -87,7 +87,6 @@ body {
   left: 4px;
 }
 
-
 .modal-confirm {		
 	font-family: 'Varela Round', sans-serif;
 	color: #636363;
@@ -160,8 +159,22 @@ body {
 	outline: none;
 }
 .trigger-btn {
-	display: inline-block;
+	display: none;
 	margin: 100px auto;
+}
+
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 
@@ -171,7 +184,7 @@ body {
 
 </head>
 <body>
-    <div id="form_errors" class="alert alert-danger fade in" style="display:none">
+    <div id="alert_placeholder"></div>
     </div>
 <!-- Extended default form grid -->
 <form id="mainForm" style="margin-left:2%;margin-right:40%;margin-top: 2%">
@@ -236,7 +249,7 @@ body {
        
         <!-- Grid row -->
         <div class="form-group"></div>
-        <button type="submit" class="btn btn-primary btn-md" style="float: right">Submit</button>
+        <button type="submit" class="btn btn-primary btn-md" id="submitButt" style="float: right">Submit</button>
         <div class="form-group"></div>
       </form>
       <!-- Extended default form grid -->
@@ -261,7 +274,7 @@ body {
       </div>
     </div>   
 
-    
+    <a id="hiddenSuccessTrigger" href="#myModal" class="trigger-btn" data-toggle="modal"></a>
 </body>
 <script>
   
@@ -294,16 +307,22 @@ function loadServerNamesToCombo(){
   var url = "http://127.0.0.1:5000/getServers";
 
   xhr.onreadystatechange = function () {
-      if (xhr.readyState === 4 && xhr.status === 200) {
+    
+      if (xhr.readyState === 4 && xhr.status === 200 ) {
         
         options=xhr.responseText.split(",")
         var optionsAsString = "";
         for(var i = 0; i < options.length; i++) {
             optionsAsString += "<option value='" + options[i] + "'>" + options[i] + "</option>";
             }    
-          $( 'select[id="trainingServer"]' ).append( optionsAsString );
+          $( 'select[id="trainingServer"]' ).append(optionsAsString);
+        
       }
   };
+
+  xhr.onerror=function(e){
+    bootstrap_alert("Failed to connect to server! Please make sure that you're connected to Raisa's Network.");
+  }; 
   
 xhr.open("GET", url);
 xhr.send();
@@ -322,20 +341,27 @@ $("#mainForm").submit(function(e) {
 
   xhr.onreadystatechange = function () {
       if (xhr.readyState === 4) {
+        $("#submitButt").html('Submit')
+        $("#submitButt").attr("disabled",false)
         if (xhr.status === 200){
           $('#hiddenSuccessTrigger').click();
         }else{
-          bootstrap_alert('#form_errors', 'Error: '+xhr.message);
+          bootstrap_alert( 'Registration Failed! '+xhr.responseText);
+          console.log("dhhhh kharaaaa") 
         }
       }
   };
+
   
+
 xhr.open("POST", url);
 xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 data=JSON.stringify(getInputVals());
 console.log(data)
 xhr.send(data);
 
+$("#submitButt").html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Submit')
+$("#submitButt").attr("disabled",true)
 
 
 });
@@ -366,19 +392,15 @@ function getInputVals(){
   return outDict;
 }
 
-function bootstrap_alert(elem, message, timeout) {
-  $(elem).show().html('<div class="alert"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><span>'+message+'</span></div>');
-
-  if (timeout || timeout === 0) {
-    setTimeout(function() { 
-      $(elem).alert('close');
-    }, timeout);    
-  }
+function bootstrap_alert(message, timeout) {
+  
+  
+  $('#alert_placeholder').append('<div id="alertdiv" class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>'+message+'</span></div>')
 };
 
 loadServerNamesToCombo();
 
-    
+
 
 </script>
 </html>

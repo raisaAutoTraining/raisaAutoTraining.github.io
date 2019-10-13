@@ -103,6 +103,8 @@ body {
 
 </head>
 <body>
+    <div id="alert_placeholder"></div>
+  </div>
 <!-- Material form grid -->
 <!-- Default inline form -->
 <div>
@@ -131,6 +133,29 @@ body {
 </div>
 </body>
 <script>
+
+
+
+// this is the id of the form
+function pingServer (){
+  
+
+  var xhr = new XMLHttpRequest();
+  var url = "http://127.0.0.1:5000/ping";
+
+  xhr.onerror=function(e){
+    bootstrap_alert("Failed to connect to server! Please make sure that you're connected to Raisa's Network.");
+  }; 
+
+xhr.open("GET", url);
+xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+xhr.send();
+
+}
+
+pingServer();
+
+
   function goToNextPage(){
     
     if ($("#combo option:selected").val()=="1"){
@@ -144,5 +169,9 @@ body {
       
     }
   }
+
+  function bootstrap_alert(message, timeout) { 
+    $('#alert_placeholder').append('<div id="alertdiv" class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>'+message+'</span></div>')}
+  
 </script>
 </html>

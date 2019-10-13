@@ -33,6 +33,8 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/js/mdb.min.js"></script>
 
 
+<link href="./success.css" rel="stylesheet">
+
 
 
 <style>
@@ -77,11 +79,106 @@ body {
   top: 0;
   left: 4px;
 }
+
+
+.modal-confirm {		
+	font-family: 'Varela Round', sans-serif;
+	color: #636363;
+	width: 325px;
+}
+.modal-confirm .modal-content {
+	padding: 20px;
+	border-radius: 5px;
+	border: none;
+}
+.modal-confirm .modal-header {
+	border-bottom: none;   
+	position: relative;
+}
+.modal-confirm h4 {
+	text-align: center;
+	font-size: 26px;
+	margin: 30px 0 -15px;
+}
+.modal-confirm .form-control, .modal-confirm .btn {
+	min-height: 40px;
+	border-radius: 3px; 
+}
+.modal-confirm .close {
+	position: absolute;
+	top: -5px;
+	right: -5px;
+}	
+.modal-confirm .modal-footer {
+	border: none;
+	text-align: center;
+	border-radius: 5px;
+	font-size: 13px;
+}	
+.modal-confirm .icon-box {
+	color: #fff;		
+	position: absolute;
+	margin: 0 auto;
+	left: 0;
+	right: 0;
+	top: -70px;
+	width: 95px;
+	height: 95px;
+	border-radius: 50%;
+	z-index: 9;
+	background: #82ce34;
+	padding: 15px;
+	text-align: center;
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+}
+.modal-confirm .icon-box i {
+	font-size: 58px;
+	position: relative;
+	top: 3px;
+}
+.modal-confirm.modal-dialog {
+	margin-top: 80px;
+}
+.modal-confirm .btn {
+	color: #fff;
+	border-radius: 4px;
+	background: #82ce34;
+	text-decoration: none;
+	transition: all 0.4s;
+	line-height: normal;
+	border: none;
+}
+.modal-confirm .btn:hover, .modal-confirm .btn:focus {
+	background: #6fb32b;
+	outline: none;
+}
+.trigger-btn {
+	display: none;
+	margin: 100px auto;
+}
+
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
 </style>
         
 
 </head>
 <body>
+    <div id="alert_placeholder"></div>
+  </div>
 <!-- Extended default form grid -->
 <form id="mainForm" style="margin-left:2%;margin-right:40%;margin-top: 2%">
         <!-- Grid row -->
@@ -113,9 +210,29 @@ body {
        
         <!-- Grid row -->
         <div class="form-group"></div>
-        <button type="submit" class="btn btn-primary btn-md" style="float: right">Submit</button>
+        <button type="submit" class="btn btn-primary btn-md" id="submitButt" style="float: right">Submit</button>
         <div class="form-group"></div>
       </form>
+      <div id="myModal" class="modal fade">
+        <div class="modal-dialog modal-confirm">
+          <div class="modal-content">
+            <div class="modal-header">
+              <div class="icon-box">
+                <i class="material-icons">&#xE876;</i>
+              </div>				
+              <h4 class="modal-title" style="width: 100%">Awesome!</h4>	
+            </div>
+            <div class="modal-body">
+              <p class="text-center">Your package has been registered successfully. You should receive a confirmation email shortly.</p>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-block" data-dismiss="modal" onclick="goHome();">Home</button>
+            </div>
+          </div>
+        </div>
+      </div>   
+  
+      <a id="hiddenSuccessTrigger" href="#myModal" class="trigger-btn" data-toggle="modal"></a>
       <!-- Extended default form grid -->
   <!-- Extended material form grid -->
 </body>
@@ -134,20 +251,29 @@ $("#mainForm").submit(function(e) {
 
   if (isDeleteRequest){
     urlCommand="delete"
-    data={"packageName":$("packageName").val()}
+    data={"packageName":$("#packageName").val()}
   }else //it's an update
   {
-    data={"packageName":$("packageName").val(),"reTrainAfterUpdate":$('gridCheck').prop('checked')}
+    data={"packageName":$("#packageName").val(),"reTrainAfterUpdate":$('#gridCheck').prop('checked')}
     urlCommand="update"
   }
+
 
   var url = "http://127.0.0.1:5000/"+urlCommand;
 
   xhr.onreadystatechange = function () {
-      if (xhr.readyState === 4 && xhr.status === 200) {
-          alert(xhr.responseText);
-          
+      if (xhr.readyState === 4 ){
+        $("#submitButt").html('Submit')
+        $("#submitButt").attr("disabled",false)
+      if (xhr.status === 200) {
+        $('#hiddenSuccessTrigger').click();
+      }else{
+        commStr=isDeleteRequest?"Delete":"Update";
+        bootstrap_alert( ' Failed! '+xhr.responseText);
+        console.log("laaaaaaaaaaa2aaaaaaaaa")
       }
+    }
+    
   };
   
 
@@ -156,6 +282,10 @@ xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 data=JSON.stringify(data);
 console.log(data)
 xhr.send(data);
+
+
+$("#submitButt").html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Submit')
+$("#submitButt").attr("disabled",true)
 
 
 
@@ -168,5 +298,11 @@ $("#deleteRadio").change(function () {
 $("#updateRadio").change(function () {
     $("#gridCheck").removeAttr("disabled");
 });
+
+function bootstrap_alert(message, timeout) {
+  
+  
+  $('#alert_placeholder').append('<div id="alertdiv" class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>'+message+'</span></div>')
+};
 </script>
 </html>
