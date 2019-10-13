@@ -104,6 +104,7 @@ body {
 <script>
 
 function readTextFile() {
+  
   var rawFile = new XMLHttpRequest();
   rawFile.open("GET", "./allReports.csv", false);
   rawFile.onreadystatechange = function() {

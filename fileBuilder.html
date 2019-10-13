@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+<meta charset="UTF-8">
+<title>File Builder</title>
+
+
+
+
+
+
+    <!-- Font Awesome -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+<!-- Bootstrap core CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+<!-- Material Design Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/css/mdb.min.css" rel="stylesheet">
+
+
+
+<!-- JQuery -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/js/mdb.min.js"></script>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+
+<style>
+
+body {
+  font-size: 1em;
+  background: #fafafa;
+  font-family: Lato;
+  font-weight: 300;
+}
+
+
+
+
+</style>
+
+</head>
+<body>
+    
+    <div style="margin-left: 1%;margin-top: 2%;width:40%">
+    <div style="float:right"> <button class="btn" style="margin-top: 22%;text-transform: none ;" onclick="downloadAutoTrainFile();"><i class="fa fa-download"></i> Download File</button></div>
+    
+    <form id="mainForm" >
+    <div class="row" >
+      <div class="col-12">
+        <header>
+          <h3>Build Auto Train File</h3>
+
+        </header>
+        <div class="input-group mb-3">
+          <input id="userinput" type="text" class="form-control" placeholder="Model name" aria-label="Add an item" aria-describedby="basic-addon2" required>
+          <div class="input-group-append">
+            <!-- <button class="btn btn-outline-info" id="enter" type="button" style="margin-top: 0%">Add</button> -->
+            <button type="submit" class="btn btn-primary btn-md" id="enter" style="margin-top: 0%;">Add</button>
+            <a id="hiddenLink" style="visibility: hidden" download="auto_train.py" href="data:application/octet-stream;charset=utf-16le;base64,//5mAG8AbwAgAGIAYQByAAoA">fileStr</a>
+          </div>
+          
+          
+          
+        </div>
+    </form>
+</div>
+
+      </div>
+      <div class="col-12">
+        <ul class="list-group">
+          
+        </ul>
+      </div>
+    </div>
+  
+
+
+
+
+
+  <!-- Scripts -->
+  
+</body>
+<script>
+
+
+
+
+
+
+$("#mainForm").submit(function(e) {  
+    e.preventDefault();
+});
+
+function readTextFile(fileName) {
+  
+  var rawFile = new XMLHttpRequest();
+  rawFile.open("GET", "./"+fileName, false);
+  rawFile.onreadystatechange = function() {
+    if (rawFile.readyState === 4) {
+      var allText = rawFile.responseText;
+      data= allText;
+    }
+  }
+  rawFile.send();
+  return data;
+}
+
+
+var button = document.getElementById("enter");
+var input = document.getElementById("userinput");
+var ul = document.querySelector("ul");
+
+
+var staticFilePart =readTextFile("static.py")
+var dynamicFilePart =readTextFile("dynamic.py")
+
+
+button.addEventListener("click", function() {
+    if (/\S/.test(input.value)) {
+    
+    console.log("bazwwwwwddddd")
+    var li = document.createElement("li");
+    li.className = 'list-group-item';
+    li.textContent = input.value;
+    ul.appendChild(li);
+    }
+});
+
+function downloadAutoTrainFile(){
+    if (ul.childElementCount==0){
+        alert("You must add at least one model!")
+        return 
+    }
+
+    fileStr=buildAutoTrainFileText();
+    $("#hiddenLink").click();
+
+
+}
+    
+    
+
+
+function buildAutoTrainFileText(){
+    fileStr=staticFilePart;
+
+    ul.children.forEach(function (item, index) {
+        fileStr+=dynamicFilePart.replace("MyModel", item.value)
+        });
+    
+    return fileStr
+    
+}
+
+</script>
+</html>

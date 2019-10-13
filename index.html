@@ -3,7 +3,7 @@
 <html lang="en" >
 <head>
 <meta charset="UTF-8">
-<title>Retraining Report</title>
+<title>Raisa Auto Training Framework</title>
 
 
 
@@ -123,6 +123,7 @@ body {
                 <option value="1">Register Package</option>
                 <option value="2">Update/Delete Package</option>
                 <option value="3">Search for a Report</option>
+                <option value="4">Build your "auto_train.py" file</option>
               </select>
         <button class="btn btn-info btn-block my-4" onclick="goToNextPage();">Start</button>
 
@@ -165,9 +166,12 @@ pingServer();
       window.location.href = 'https://raisaautotraining.github.io/updateDelete.html';
 
     }else if ($("#combo option:selected").val()=="3"){
-      window.location.href = "https://raisaautotraining.github.io/reports.html";
-      
+      window.location.href = "https://raisaautotraining.github.io/reports.html"; 
+    }else if ($("#combo option:selected").val()=="4"){
+      window.location.href = "https://raisaautotraining.github.io/fileBuilder.html";
     }
+    
+
   }
 
   function bootstrap_alert(message, timeout) { 

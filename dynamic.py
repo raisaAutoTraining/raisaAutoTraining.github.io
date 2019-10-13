@@ -1,6 +1,6 @@
 
 class MyModel(AutoTrainingModel):
-    """A class that represents any ML model registered in the framework.
+    """A class that represents a ML model.
     """
 
     
