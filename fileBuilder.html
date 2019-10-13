@@ -154,8 +154,8 @@ function downloadAutoTrainFile(){
 
 function buildAutoTrainFileText(){
     fileStr=staticFilePart;
-    
-    ul.children().array.forEach(element => {
+  
+    ul.children.array.forEach(element => {
       fileStr+=dynamicFilePart.replace("MyModel", element.value)
       });  
 
