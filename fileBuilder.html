@@ -155,7 +155,7 @@ function downloadAutoTrainFile(){
 
     fileStr=buildAutoTrainFileText();
     console.log(fileStr);
-    var encodedString = Base64.encode(string);
+    var encodedString = Base64.encode(fileStr);
     
 
     var link=$("#hiddenLink");
