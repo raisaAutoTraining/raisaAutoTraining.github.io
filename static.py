@@ -1,10 +1,20 @@
 # -*- coding: utf-8 -*-
+"""
+Created on Mon Oct 14 13:50:15 2019
+
+@author: yhossam
+
+This module should be added to any package before registering it in the framework. 
+It should contain all the necassary classes for the auto-training frame work to work properly.
+
+"""
 from autotraining.model import *
 import pandas as pd
 from typing import Iterable,Dict,Union,List,Tuple
 from enum import Enum
 
 
+#NOTE: You should run this module after adding your code to make sure it doesn't have any compilation errors.
 
 
 """    
