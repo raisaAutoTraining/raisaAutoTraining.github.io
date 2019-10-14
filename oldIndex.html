@@ -1,0 +1,181 @@
+
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+<meta charset="UTF-8">
+<title>Raisa Auto Training Framework</title>
+
+
+
+
+
+
+    <!-- Font Awesome -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+<!-- Bootstrap core CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+<!-- Material Design Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/css/mdb.min.css" rel="stylesheet">
+
+
+
+<!-- JQuery -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/js/mdb.min.js"></script>
+
+
+<style>
+
+body {
+  font-size: 1em;
+  background: #fafafa;
+  font-family: Lato;
+  font-weight: 300;
+  text-align:center;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Roboto:700');
+
+
+
+#container {
+  color:black;
+  text-transform: uppercase;
+  font-size:95px;
+  font-weight:bold;
+  padding-top:200px;  
+  position:fixed;
+  width:100%;
+  bottom:60%;
+  display:block;
+  font-family:Monotype Corsiva, Times, Serif;
+}
+
+#flip {
+  height:50px;
+  vertical-align: center;
+  font-size:36px;
+  overflow:hidden;
+  font-family:Roboto;
+
+}
+
+#flip > div > div {
+  color:#fff;
+  padding:4px 12px;
+  height:45px;
+  margin-bottom:45px;
+  display:inline-block;
+}
+
+#flip div:first-child {
+  animation: show 5s linear infinite;
+}
+
+#flip div div {
+  color:#2ecc40;
+}
+#flip div:first-child div {
+  color:#ff4136;
+}
+#flip div:last-child div {
+  color:#4285f4
+}
+
+@keyframes show {
+  0% {margin-top:-270px;}
+  5% {margin-top:-180px;}
+  33% {margin-top:-180px;}
+  38% {margin-top:-90px;}
+  66% {margin-top:-90px;}
+  71% {margin-top:0px;}
+  99.99% {margin-top:0px;}
+  100% {margin-top:-270px;}
+}
+
+
+</style>
+
+</head>
+<body>
+    <div id="alert_placeholder"></div>
+  </div>
+<!-- Material form grid -->
+<!-- Default inline form -->
+<div>
+    <div id="container" >
+        Raisa 
+        <div id=flip>
+          <div><div>Framework</div></div>
+          <div><div>Training</div></div>
+          <div><div>Auto</div></div>
+        </div>
+      </div>
+<div style="margin-left:40%;margin-right:40%;padding-top: 20%">
+        <!-- Default input -->
+        <select  class="browser-default custom-select" id="combo">
+                <option value="" disabled selected hidden>What do you want to do?</option>
+                <option value="1">Register Package</option>
+                <option value="2">Update/Delete Package</option>
+                <option value="3">Search for a Report</option>
+                <option value="4">Build your "auto_train.py" file</option>
+              </select>
+        <button  class="btn btn-block my-4" style="background-color: #4285f4;color: white" onclick="goToNextPage();">Start</button>
+
+     
+      <!-- Default inline form -->
+<!-- Extended material form grid -->
+</div>
+</div>
+</body>
+<script>
+
+
+
+// this is the id of the form
+function pingServer (){
+  
+
+  var xhr = new XMLHttpRequest();
+  var url = "http://127.0.0.1:5000/ping";
+
+  xhr.onerror=function(e){
+    bootstrap_alert("Failed to connect to server! Please make sure that you're connected to Raisa's Network.");
+  }; 
+
+xhr.open("GET", url);
+xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+xhr.send();
+
+}
+
+pingServer();
+
+
+  function goToNextPage(){
+    
+    if ($("#combo option:selected").val()=="1"){
+      window.location.href ="https://raisaautotraining.github.io/register.html";
+
+    }else if ($("#combo option:selected").val()=="2"){
+      window.location.href = 'https://raisaautotraining.github.io/updateDelete.html';
+
+    }else if ($("#combo option:selected").val()=="3"){
+      window.location.href = "https://raisaautotraining.github.io/reports.html"; 
+    }else if ($("#combo option:selected").val()=="4"){
+      window.location.href = "https://raisaautotraining.github.io/fileBuilder.html";
+    }
+    
+
+  }
+
+  function bootstrap_alert(message, timeout) { 
+    $('#alert_placeholder').append('<div id="alertdiv" class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>'+message+'</span></div>')}
+  
+</script>
+</html>
