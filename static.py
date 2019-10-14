@@ -9,8 +9,8 @@ from enum import Enum
 
 """    
 NOTE: all methods marked with the comment '#TODO: OPTIONAL METHOD' just before their definition are optional.
-An optional function is one that is already implemented in the base class so if you didn't implement it, it the base class method will be used instead.
-The base class method behaviour is described in each method's summary.
+An optional function is one that is already implemented in the base class so if you didn't implement it, the base class method will be used instead.
+The base class method behaviour (default behaviour) is described in each method's summary.
 """
 
 
@@ -30,7 +30,6 @@ class MyModelsEvaluator(ModelsEvaluator):
             Check the enum class ModelsEvaluationResult in the model.py module for more details
             to .
         """
-        return ModelsEvaluationResult.SAVE_TRUE_ONLY
 
 
 

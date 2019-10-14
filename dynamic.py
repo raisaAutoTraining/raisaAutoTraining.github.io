@@ -3,6 +3,7 @@
 
 
 
+
 class MyModel(AutoTrainingModel):
     """A class that represents a ML model.
     """
@@ -60,4 +61,4 @@ class MyModel(AutoTrainingModel):
             modelObj (object): model object (keras model object, sklearn, pytorch, etc.)
             path (str): full path to the model file.
         """
-        pass  
+          
