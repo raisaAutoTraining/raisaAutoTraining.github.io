@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Retraining Report</title>
+<style>
+  @import url(https://fonts.googleapis.com/css?family=Lato:100,300,400);
+.sexytabs > ul {
+  text-align: center;
+  font-weight: 500;
+  margin: 50px 0 0;
+  padding: 0;
+  position: relative;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+.sexytabs > ul > li {
+  display: inline-block;
+  background: #fafafa;
+  padding: 0.6em 0;
+  position: relative;
+  width: 33%;
+  margin: 0 0 0 -4px;
+}
+.sexytabs > ul > li:before, .sexytabs > ul > li:after {
+  opacity: 0;
+  transition: 0.3s ease;
+}
+.sexytabs > ul > li.ui-tabs-active:before, .sexytabs > ul > li.ui-tabs-active:after, .sexytabs > ul > li.ui-state-hover:before, .sexytabs > ul > li.ui-state-hover:after, .sexytabs > ul > li.ui-state-focus:before, .sexytabs > ul > li.ui-state-focus:after {
+  opacity: 1;
+}
+.sexytabs > ul > li:before, .sexytabs > ul > li.ui-state-active.ui-state-hover:before, .sexytabs > ul > li.ui-state-active.ui-state-focus:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  box-shadow: 0 2px 3px rgba(22, 195, 255, 0.5);
+  top: 50%;
+  bottom: 0px;
+  left: 5px;
+  right: 5px;
+  border-radius: 100px / 10px;
+}
+.sexytabs > ul > li:after, .sexytabs > ul > li.ui-state-active.ui-state-hover:after, .sexytabs > ul > li.ui-state-active.ui-state-focus:after {
+  content: "";
+  background: #fafafa;
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  left: 50%;
+  bottom: -6px;
+  margin-left: -6px;
+  transform: rotate(45deg);
+  box-shadow: inset 3px 3px 3px rgba(22, 195, 255, 0.5), inset 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+.sexytabs > ul > li.ui-state-hover:before, .sexytabs > ul > li.ui-state-focus:before {
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+}
+.sexytabs > ul > li.ui-state-hover:after, .sexytabs > ul > li.ui-state-focus:after {
+  box-shadow: inset 3px 3px 3px rgba(0, 0, 0, 0.2), inset 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+.sexytabs > ul > li.ui-state-focus a {
+  text-decoration: underline;
+}
+.sexytabs > ul > li:focus {
+  outline: none;
+}
+.sexytabs > ul > li a {
+  color: #444;
+  text-decoration: none;
+}
+.sexytabs > ul > li a:focus {
+  outline: none;
+}
+.sexytabs > ul > li a span {
+  position: relative;
+  top: -0.5em;
+}
+
+.sexytabs.dark > ul {
+  border-bottom-color: rgba(255, 255, 255, 0.3);
+}
+.sexytabs.dark > ul > li {
+  background: #333;
+}
+.sexytabs.dark > ul > li:before, .sexytabs.dark > ul > li.ui-state-active.ui-state-hover:before, .sexytabs.dark > ul > li.ui-state-active.ui-state-focus:before {
+  box-shadow: 0 2px 3px rgba(255, 255, 255, 0.3);
+}
+.sexytabs.dark > ul > li:after, .sexytabs.dark > ul > li.ui-state-active.ui-state-hover:after, .sexytabs.dark > ul > li.ui-state-active.ui-state-focus:after {
+  background: #333;
+  box-shadow: inset 3px 3px 3px rgba(255, 255, 255, 0.3), inset 1px 1px 1px rgba(255, 255, 255, 0.5);
+}
+.sexytabs.dark > ul > li.ui-state-hover:before, .sexytabs.dark > ul > li.ui-state-focus:before {
+  box-shadow: none;
+}
+.sexytabs.dark > ul > li.ui-state-hover:after, .sexytabs.dark > ul > li.ui-state-focus:after {
+  box-shadow: inset 1px 1px 0px rgba(255, 255, 255, 0.4);
+}
+.sexytabs.dark > ul > li a {
+  color: white;
+}
+
+
+
+body {
+  font-size: 1em;
+  background: #fafafa;
+  font-family: Lato;
+  font-weight: 300;
+}
+
+h1 {
+  text-align: center;
+  font-size: 20px;
+}
+
+.sexytabs {
+  width: 90%;
+  min-width: 360px;
+  margin: auto;
+}
+
+.contents {
+  padding: 20px 50px;
+  min-height: 200px;
+}
+
+.darkpage {
+  background: #333;
+  color: white;
+}
+
+.darkpage,
+.lightpage {
+  padding: 50px 0;
+}
+
+@media screen and (min-width: 1000px) {
+  .darkpage,
+  .lightpage {
+    width: 100%;
+    float: left;
+    padding: 0;
+  }
+}
+
+.zui-table {
+    border: solid 1px #DDEEEE;
+    border-collapse: collapse;
+    border-spacing: 0;
+	font: normal 13px Arial, sans-serif;
+	width: 100%
+}
+.zui-table thead th {
+    background-color: #DDEFEF;
+    border: solid 1px #DDEEEE;
+    color: #336B6B;
+    padding: 10px;
+    text-align: left;
+    text-shadow: 1px 1px 1px #fff;
+}
+.zui-table tbody td {
+    border: solid 1px #DDEEEE;
+    color: #333;
+    padding: 10px;
+    text-shadow: 1px 1px 1px #fff;
+}
+
+</style>
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div class="lightpage">
+<div><a href="https://raisaautotraining.github.io/reports.html"><img alt="Home Page" src="https://img.icons8.com/material/48/000000/search--v1.png" style="float:right;margin-right: 5%" title="Search In All Reports" width="35px"/></a>
+</div>
+<div class="sexytabs">
+<ul>
+<li><a href="#modelsSummary">
+<span>Models Summary</span></a></li>
+<li><a href="#methodsSummary">
+<span>Methods Summary</span></a></li>
+<li><a href="#loggingResults">
+<span>Logging Results</span></a></li>
+</ul>
+<div class="contents">
+<div id="modelsSummary">
+<h2>Models</h2>
+<html><body><table border="0" class="dataframe zui-table"> <thead> <tr style="text-align: right;"> <th>Model Name</th> <th>Acceptable Accuracy</th> <th>Saved As Best Model</th> </tr> </thead> <tbody> <tr> <td>SuperModel</td> <td>No</td> <td>Yes</td> </tr> <tr> <td>AmazingModel</td> <td>No</td> <td>Yes</td> </tr> <tr> <td>WorstModel</td> <td>Yes</td> <td>No</td> </tr> </tbody></table></body></html></div>
+<div id="methodsSummary">
+<h2>Methods</h2>
+<html><body><table border="0" class="dataframe zui-table"> <thead> <tr style="text-align: right;"> <th>Method Name</th> <th>Execution Time In Secs</th> <th>Start Time</th> <th>End Time</th> </tr> </thead> <tbody> <tr> <td>DBManager.addToModelHistory</td> <td>0.0</td> <td>2019-10-02 14:02:47</td> <td>2019-10-02 14:02:48</td> </tr> <tr> <td>DBManager.addToModelHistory</td> <td>0.566114</td> <td>2019-10-02 14:05:35</td> <td>2019-10-02 14:05:36</td> </tr> <tr> <td>functionHeby</td> <td>0.0</td> <td>2019-10-02 14:14:33</td> <td>2019-10-02 14:14:33</td> </tr> <tr> <td>functionHeby</td> <td>0.0</td> <td>2019-10-03 14:38:27</td> <td>2019-10-03 14:38:27</td> </tr> <tr> <td>functionHeby</td> <td>0.0</td> <td>2019-10-03 15:39:27</td> <td>2019-10-03 15:39:27</td> </tr> <tr> <td>functionHeby</td> <td>0.0</td> <td>2019-10-03 16:32:12</td> <td>2019-10-03 16:32:12</td> </tr> <tr> <td>functionHeby</td> <td>0.0</td> <td>2019-10-07 16:27:14</td> <td>2019-10-07 16:27:14</td> </tr> <tr> <td>functionHeby</td> <td>0.0</td> <td>2019-10-07 17:13:58</td> <td>2019-10-07 17:13:58</td> </tr> <tr> <td>functionHeby</td> <td>0.0</td> <td>2019-10-07 17:53:26</td> <td>2019-10-07 17:53:26</td> </tr> <tr> <td>functionHeby</td> <td>0.0</td> <td>2019-10-07 18:06:04</td> <td>2019-10-07 18:06:04</td> </tr> <tr> <td>functionHeby</td> <td>0.0</td> <td>2019-10-07 18:24:47</td> <td>2019-10-07 18:24:47</td> </tr> <tr> <td>functionHeby</td> <td>0.0</td> <td>2019-10-07 18:27:13</td> <td>2019-10-07 18:27:13</td> </tr> <tr> <td>functionHeby</td> <td>0.0</td> <td>2019-10-07 18:29:55</td> <td>2019-10-07 18:29:55</td> </tr> <tr> <td>functionHeby</td> <td>0.0</td> <td>2019-10-07 18:32:40</td> <td>2019-10-07 18:32:40</td> </tr> <tr> <td>functionHeby</td> <td>0.0</td> <td>2019-10-07 18:35:44</td> <td>2019-10-07 18:35:44</td> </tr> <tr> <td>functionHeby</td> <td>0.0</td> <td>2019-10-07 19:41:07</td> <td>2019-10-07 19:41:07</td> </tr> </tbody></table></body></html></div>
+<div id="loggingResults">
+<h2>Raw Data</h2><html><body><table border="0" class="dataframe zui-table" style="margin-bottom:50px"> <thead> <tr style="text-align: right;"> <th>Attribute</th> <th>Value</th> </tr> </thead> <tbody> <tr> <td>Mean Val</td> <td>23.11</td> </tr> <tr> <td>Number of producing wells</td> <td>54311.0</td> </tr> <tr> <td>Average number of months</td> <td>20.444</td> </tr> <tr> <td>df1 number of rows</td> <td>13425.0</td> </tr> </tbody></table></body></html><h2>SuperModel</h2><html><body><table border="0" class="dataframe zui-table" style="margin-bottom:50px"> <thead> <tr style="text-align: right;"> <th>Attribute</th> <th>Value</th> </tr> </thead> <tbody> <tr> <td>Mae</td> <td>25.3</td> </tr> <tr> <td>Max</td> <td>1.523423</td> </tr> <tr> <td>myVals</td> <td>[3, 2.1, 5.555, 78.32]</td> </tr> </tbody></table></body></html><h2>AmazingModel</h2><html><body><table border="0" class="dataframe zui-table" style="margin-bottom:50px"> <thead> <tr style="text-align: right;"> <th>Attribute</th> <th>Value</th> </tr> </thead> <tbody> <tr> <td>Mae</td> <td>10.22</td> </tr> <tr> <td>std</td> <td>3.32566432</td> </tr> <tr> <td>vals</td> <td>[1.30000e+00 4.23444e+03 6.42000e+01 8.73000e+01 9.32000e+01 0.00000e+00
+ 1.00000e+00 2.00000e+00 3.00000e+00 4.00000e+00 5.00000e+00 6.00000e+00
+ 7.00000e+00 8.00000e+00 9.00000e+00]</td> </tr> </tbody></table></body></html><h2>WorstModel</h2><html><body><table border="0" class="dataframe zui-table" style="margin-bottom:50px"> <thead> <tr style="text-align: right;"> <th>Attribute</th> <th>Value</th> </tr> </thead> <tbody> <tr> <td>Mae</td> <td>5.3333333333</td> </tr> <tr> <td>Max</td> <td>22.1</td> </tr> <tr> <td>Min</td> <td>2.2434343</td> </tr> <tr> <td>std</td> <td>33.523423</td> </tr> </tbody></table></body></html></div>
+</div>
+</div>
+</div>
+<!-- partial -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script crossorigin="anonymous" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+  $(".sexytabs").tabs({ 
+  show: { effect: "slide", direction: "left", duration: 200, easing: "easeOutBack" } ,
+  hide: { effect: "slide", direction: "right", duration: 200, easing: "easeInQuad" } 
+});
+</script>
+</body>
+</html>
